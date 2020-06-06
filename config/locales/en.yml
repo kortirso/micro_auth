@@ -1,0 +1,12 @@
+en:
+  dry_validation:
+    errors:
+      user:
+        is_exist: User with such email already exists
+        rules:
+          name:
+            filled?: Name can't be blank
+          email:
+            filled?: Email can't be blank
+          password_digest:
+            filled?: Password can't be blank

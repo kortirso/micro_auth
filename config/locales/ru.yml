@@ -1,0 +1,12 @@
+ru:
+  dry_validation:
+    errors:
+      user:
+        is_exist: Пользователь с таким email уже существует
+        rules:
+          name:
+            filled?: Имя не может быть пустым
+          email:
+            filled?: Email не может быть пустым
+          password_digest:
+            filled?: Пароль не может быть пустой

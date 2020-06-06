@@ -29,6 +29,11 @@ gem 'config', '~> 2.2.1'
 # encryption
 gem 'bcrypt', '~> 3.1.13'
 
+# Form objects
+gem 'dry-struct', '~> 1.3.0'
+gem 'dry-types', '~> 1.4.0'
+gem 'dry-validation', '~> 1.5.0'
+
 group :test do
   gem 'database_cleaner-sequel', '~> 1.8.0'
   gem 'factory_bot', '~> 5.2.0'
