@@ -7,6 +7,9 @@ ruby '2.7.1'
 # rack
 gem 'rack', '~> 2.1.3'
 
+# rake
+gem 'rake', '~> 13.0.1'
+
 # web server
 gem 'puma', '~> 4.3.5'
 
@@ -22,6 +25,9 @@ gem 'i18n', '~> 1.8.2'
 
 # Config
 gem 'config', '~> 2.2.1'
+
+# encryption
+gem 'bcrypt', '~> 3.1.13'
 
 group :test do
   gem 'database_cleaner-sequel', '~> 1.8.0'
