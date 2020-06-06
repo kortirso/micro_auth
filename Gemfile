@@ -34,6 +34,9 @@ gem 'dry-struct', '~> 1.3.0'
 gem 'dry-types', '~> 1.4.0'
 gem 'dry-validation', '~> 1.5.0'
 
+# activerecord tasks for schema dump
+gem 'activerecord'
+
 group :test do
   gem 'database_cleaner-sequel', '~> 1.8.0'
   gem 'factory_bot', '~> 5.2.0'

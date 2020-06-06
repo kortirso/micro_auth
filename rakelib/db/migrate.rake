@@ -11,6 +11,8 @@ namespace :db do
       version = args.version.to_i if args.version
       Sequel::Migrator.run(db, migrations, target: version)
       puts '*** db:migrate executed ***'
+
+      Rake::Task['db:schema:dump'].invoke
     end
   end
 end
