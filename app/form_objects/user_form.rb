@@ -3,6 +3,8 @@
 class UserForm < Dry::Struct
   include BCrypt
 
+  PASSWORD_MINIMUM_SIZE = 8
+
   module Types
     include Dry::Types(default: :nominal)
   end
@@ -16,11 +18,21 @@ class UserForm < Dry::Struct
 
   def save
     attributes = to_hash
+    return false unless password_is_valid?(attributes[:password])
+
     attributes[:password_digest] = Password.create(attributes[:password]) if attributes[:password]
     attributes[:id] ? update(attributes) : create(attributes)
   end
 
   private
+
+  def password_is_valid?(password)
+    return true if password.nil?
+    return true if password.size >= PASSWORD_MINIMUM_SIZE
+
+    @errors = 'Password is too short, must be at least 8 characters'
+    false
+  end
 
   def create(attributes)
     schema = UserCreateContract.new.call(attributes)
