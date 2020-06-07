@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe ErrorSerializer do
   subject { described_class }
 
@@ -36,7 +38,7 @@ RSpec.describe ErrorSerializer do
           errors: [
             {
               detail: message,
-              meta: meta
+              meta:   meta
             }
           ]
         )

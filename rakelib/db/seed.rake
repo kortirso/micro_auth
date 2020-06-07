@@ -4,7 +4,7 @@ require 'bcrypt'
 
 namespace :db do
   desc 'Seed database'
-  task :seed => [:settings] do |t, args|
+  task seed: [:settings] do |_t, _args|
     require 'sequel/core'
 
     Sequel.connect(Settings.db.to_hash) do |db|

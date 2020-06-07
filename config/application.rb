@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Application
-  def self.call(env)
+  def self.call(_env)
     [200, {}, ['MicroAuth']]
   end
 

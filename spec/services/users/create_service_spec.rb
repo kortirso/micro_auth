@@ -19,7 +19,7 @@ RSpec.describe Users::CreateService do
   context 'with invalid parameters' do
     it 'does not create user' do
       expect { subject.call('bob', 'bob@example.com', '') }
-        .not_to change { User.count }
+        .not_to change(User, :count)
     end
 
     it 'and returns nil as user' do

@@ -36,7 +36,7 @@ class UserForm < Dry::Struct
 
   def create(attributes)
     schema = UserCreateContract.new.call(attributes)
-    return false unless is_valid?(schema)
+    return false unless schema_is_valid?(schema)
 
     @user = User.new
     user.set(attributes.except(:id, :password))
@@ -45,13 +45,13 @@ class UserForm < Dry::Struct
 
   def update(attributes)
     schema = UserUpdateContract.new.call(attributes)
-    return false unless is_valid?(schema)
+    return false unless schema_is_valid?(schema)
 
     @user = User.first(id: attributes[:id])
     user.update(attributes.except(:id, :password, :email))
   end
 
-  def is_valid?(schema)
+  def schema_is_valid?(schema)
     @errors = schema.errors(locale: I18n.locale).to_h.values.flatten
     return true if errors.empty?
 

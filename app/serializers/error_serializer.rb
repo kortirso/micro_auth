@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ErrorSerializer
   extend self
 
@@ -13,7 +15,7 @@ module ErrorSerializer
     error_messages.map { |message| build_error(message, meta) }
   end
 
-  def build_error(message, meta = {})
+  def build_error(message, meta={})
     error = { detail: message }
     error[:meta] = meta if meta.present?
     error

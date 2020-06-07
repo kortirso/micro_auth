@@ -37,6 +37,11 @@ gem 'dry-validation', '~> 1.5.0'
 # activerecord tasks for schema dump
 gem 'activerecord'
 
+group :development do
+  gem 'rubocop', '~> 0.85.0', require: false
+  gem 'rubocop-performance', require: false
+end
+
 group :test do
   gem 'database_cleaner-sequel', '~> 1.8.0'
   gem 'factory_bot', '~> 5.2.0'

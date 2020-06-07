@@ -5,7 +5,7 @@ require 'active_record'
 namespace :db do
   namespace :schema do
     desc 'Dump database schema'
-    task :dump => [:settings] do |t, args|
+    task dump: [:settings] do |_t, _args|
       settings = Settings.db.to_hash
       url = "postgres://#{settings.fetch(:host)}/#{settings.fetch(:database)}"
       ActiveRecord::Base.establish_connection(url)

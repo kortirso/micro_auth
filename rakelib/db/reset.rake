@@ -2,7 +2,7 @@
 
 namespace :db do
   desc 'Reset database'
-  task :reset => [:settings] do |t, args|
+  task reset: [:settings] do |_t, _args|
     require 'sequel/core'
     Sequel.extension :migration
 
