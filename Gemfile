@@ -27,9 +27,6 @@ gem 'i18n', '~> 1.8.2'
 # Config
 gem 'config', '~> 2.2.1'
 
-# encryption
-gem 'bcrypt', '~> 3.1.13'
-
 # Contracts
 gem 'dry-types', '~> 1.4.0'
 gem 'dry-validation', '~> 1.5.0'
