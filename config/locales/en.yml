@@ -1,12 +1,12 @@
 en:
   dry_validation:
     errors:
-      user:
-        is_exist: User with such email already exists
-        rules:
-          name:
-            filled?: Name can't be blank
-          email:
-            filled?: Email can't be blank
-          password_digest:
-            filled?: Password can't be blank
+      rules:
+        name:
+          filled?: Name can't be blank
+        email:
+          filled?: Email can't be blank
+          is_exist: User with such email already exists
+        password:
+          filled?: Password can't be blank
+          is_too_short: Password's minimum length is 8 characters

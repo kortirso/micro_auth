@@ -11,15 +11,22 @@ module Users
     attr_reader :user
 
     def call
-      user_form = UserForm.new(
-        id:       nil,
-        name:     @name,
-        email:    @email,
-        password: @password
-      )
+      contract = Users::CreateContract.new
+      errors = contract.call(user_attributes).errors.to_h
+      return fail!(errors) if errors.size.positive?
 
-      fail!(user_form.errors) unless user_form.save
-      @user = user_form.user
+      @user = User.create(user_attributes)
+    end
+
+    private
+
+    def user_attributes
+      @user_attributes ||=
+        {
+          name:     @name,
+          email:    @email,
+          password: @password
+        }.compact
     end
   end
 end

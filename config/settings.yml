@@ -5,3 +5,5 @@ db:
   user:
   password:
   database: micro_auth
+password:
+  minimum_length: 8

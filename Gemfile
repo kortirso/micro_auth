@@ -16,6 +16,7 @@ gem 'puma', '~> 4.3.5'
 # database connection
 gem 'pg', '~> 1.2.3'
 gem 'sequel', '~> 5.32.0'
+gem 'sequel_secure_password', '~> 0.2.15'
 
 # serialization
 gem 'fast_jsonapi', '~> 1.5'
@@ -29,8 +30,7 @@ gem 'config', '~> 2.2.1'
 # encryption
 gem 'bcrypt', '~> 3.1.13'
 
-# Form objects
-gem 'dry-struct', '~> 1.3.0'
+# Contracts
 gem 'dry-types', '~> 1.4.0'
 gem 'dry-validation', '~> 1.5.0'
 
