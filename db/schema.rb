@@ -15,10 +15,19 @@ ActiveRecord::Schema.define() do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "user_sessions", id: :bigint, default: nil, force: :cascade do |t|
+    t.text "uuid", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, default: -> { "now()" }, null: false
+    t.datetime "updated_at", precision: 6, default: -> { "now()" }, null: false
+    t.index ["user_id"], name: "user_sessions_user_id_index"
+    t.index ["uuid"], name: "user_sessions_uuid_key", unique: true
+  end
+
   create_table "users", id: :bigint, default: nil, force: :cascade do |t|
-    t.string "name", limit: 255, null: false
-    t.string "password_digest", limit: 255, null: false
-    t.string "email", limit: 255, null: false
+    t.text "name", null: false
+    t.text "password_digest", null: false
+    t.text "email", null: false
     t.datetime "created_at", precision: 6, default: -> { "now()" }, null: false
     t.datetime "updated_at", precision: 6, default: -> { "now()" }, null: false
     t.index ["email"], name: "users_email_key", unique: true

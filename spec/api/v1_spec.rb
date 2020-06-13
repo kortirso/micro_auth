@@ -55,4 +55,75 @@ describe Api::V1, type: :routes do
       end
     end
   end
+
+  context 'POST /api/v1/sessions' do
+    context 'with invalid params' do
+      let(:params) { { email: '2', password: '3' }.to_json }
+      let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+      let(:request) { post '/api/v1/sessions', params, headers }
+
+      it 'does not create user session' do
+        expect { request }.not_to change(UserSession, :count)
+      end
+
+      context 'in response' do
+        before { request }
+
+        it 'returns success status' do
+          expect(last_response.status).to eq(400)
+        end
+
+        it 'and returns error' do
+          expect(response_body['errors']).not_to eq nil
+        end
+      end
+    end
+
+    context 'with invalid params for existed user' do
+      let(:user) { create :user }
+      let(:params) { { email: user.email, password: '3' }.to_json }
+      let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+      let(:request) { post '/api/v1/sessions', params, headers }
+
+      it 'does not create user session' do
+        expect { request }.not_to change(UserSession, :count)
+      end
+
+      context 'in response' do
+        before { request }
+
+        it 'returns success status' do
+          expect(last_response.status).to eq(400)
+        end
+
+        it 'and returns error' do
+          expect(response_body['errors']).not_to eq nil
+        end
+      end
+    end
+
+    context 'with valid params' do
+      let(:password) { '1234QWER' }
+      let(:user) { create :user, password: password }
+      let(:params) { { email: user.email, password: password }.to_json }
+      let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+      let(:request) { post '/api/v1/sessions', params, headers }
+
+      it 'creates user session' do
+        expect { request }.to change { UserSession.count }.by(1)
+      end
+
+      context 'in response' do
+        before { request }
+
+        it 'returns success status' do
+          expect(last_response.status).to eq(201)
+        end
+
+        it 'and returns token' do
+          expect(response_body['token']).not_to eq nil
+        end
+      end
+    end
+  end
 end
