@@ -21,6 +21,7 @@ module ApplicationLoader
   end
 
   def require_app
+    require_file 'app/api/v1'
     require_file 'config/application'
     require_file 'app/contracts/basic_contract'
     require_file 'app/services/basic_service'

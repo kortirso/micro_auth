@@ -4,29 +4,17 @@ module Users
   class CreateService
     prepend BasicService
 
-    param :name
-    param :email
-    param :password
-
-    attr_reader :user
-
-    def call
-      contract = Users::CreateContract.new
-      errors = contract.call(user_attributes).errors.to_h
-      return fail!(errors) if errors.size.positive?
-
-      @user = User.create(user_attributes)
+    option :user do
+      option :name
+      option :email
+      option :password
     end
 
-    private
+    attr_reader :result
 
-    def user_attributes
-      @user_attributes ||=
-        {
-          name:     @name,
-          email:    @email,
-          password: @password
-        }.compact
+    def call
+      validate_with(Users::CreateContract, @user.to_h)
+      @result = ::User.create(@user.to_h) if errors.blank?
     end
   end
 end

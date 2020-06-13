@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-class Application
-  def self.call(_env)
-    [200, {}, ['MicroAuth']]
-  end
+class Application < Grape::API
+  mount ::Api::V1
 
   def self.root
     File.expand_path('..', __dir__)

@@ -2,7 +2,7 @@
 
 module Users
   class CreateContract < BasicContract
-    schema do
+    params do
       required(:name).filled(:string)
       required(:email).filled(:string)
       required(:password).filled(:string)
