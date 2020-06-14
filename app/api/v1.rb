@@ -45,5 +45,20 @@ module Api
         error!(ErrorSerializer.from_messages(service.errors), 400)
       end
     end
+
+    desc 'Verifies user token'
+    params do
+      build_with Grape::Extensions::Hash::ParamBuilder
+      requires :token, type: String, desc: 'User token'
+    end
+    get 'verify_token' do
+      service = Auth::FetchUserService.call(token: params.fetch(:token))
+
+      if service.success?
+        { user_id: service.result.id }
+      else
+        error!(ErrorSerializer.from_messages(service.errors), 403)
+      end
+    end
   end
 end

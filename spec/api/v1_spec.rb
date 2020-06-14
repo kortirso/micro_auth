@@ -23,7 +23,7 @@ describe Api::V1, type: :routes do
       context 'in response' do
         before { request }
 
-        it 'returns success status' do
+        it 'returns error status' do
           expect(last_response.status).to eq(400)
         end
 
@@ -69,7 +69,7 @@ describe Api::V1, type: :routes do
       context 'in response' do
         before { request }
 
-        it 'returns success status' do
+        it 'returns error status' do
           expect(last_response.status).to eq(400)
         end
 
@@ -92,7 +92,7 @@ describe Api::V1, type: :routes do
       context 'in response' do
         before { request }
 
-        it 'returns success status' do
+        it 'returns error status' do
           expect(last_response.status).to eq(400)
         end
 
@@ -123,6 +123,39 @@ describe Api::V1, type: :routes do
         it 'and returns token' do
           expect(response_body['token']).not_to eq nil
         end
+      end
+    end
+  end
+
+  context 'GET /api/v1/verify_token' do
+    let(:token) { JwtEncoder.encode(uuid: session_uuid) }
+    let(:headers) { { 'CONTENT_TYPE' => 'application/json' } }
+    let(:request) { get "/api/v1/verify_token?token=#{token}", {}, headers }
+
+    before { request }
+
+    context 'with invalid params' do
+      let(:session_uuid) { 'invalid' }
+
+      it 'returns error status' do
+        expect(last_response.status).to eq(403)
+      end
+
+      it 'and returns error' do
+        expect(response_body['errors']).not_to eq nil
+      end
+    end
+
+    context 'with valid params' do
+      let(:user_session) { create :user_session }
+      let(:session_uuid) { user_session.uuid }
+
+      it 'returns success status' do
+        expect(last_response.status).to eq(200)
+      end
+
+      it 'and returns user_id' do
+        expect(response_body['user_id']).to eq user_session.user.id
       end
     end
   end
