@@ -9,3 +9,5 @@ password:
   minimum_length: 8
 secrets:
   secret_key_base: '1234567890'
+rabbitmq:
+  consumer_pool: 10

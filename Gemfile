@@ -40,6 +40,9 @@ gem 'activerecord'
 # token
 gem 'jwt', '~> 2.2.1'
 
+# rabbitmq
+gem 'bunny', '~> 2.15.0'
+
 group :development do
   gem 'rubocop', '~> 0.85.0', require: false
   gem 'rubocop-performance', require: false
