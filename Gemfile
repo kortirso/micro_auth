@@ -43,6 +43,10 @@ gem 'jwt', '~> 2.2.1'
 # rabbitmq
 gem 'bunny', '~> 2.15.0'
 
+# logs
+gem 'rack-ougai', '~> 0.2.1'
+gem 'rack-request-id', '~> 0.0.4'
+
 group :development do
   gem 'rubocop', '~> 0.85.0', require: false
   gem 'rubocop-performance', require: false

@@ -3,11 +3,21 @@
 class Application < Grape::API
   mount ::Api::V1
 
-  def self.root
-    File.expand_path('..', __dir__)
+  class << self
+    attr_accessor :logger
+
+    def root
+      File.expand_path('..', __dir__)
+    end
+
+    def environment
+      ENV['RACK_ENV'].to_sym
+    end
   end
 
-  def self.environment
-    ENV['RACK_ENV'].to_sym
+  helpers do
+    def logger
+      API.logger
+    end
   end
 end

@@ -1,3 +1,5 @@
+app:
+  name: micro_auth
 db:
   adapter: postgresql
   host: localhost
@@ -11,3 +13,6 @@ secrets:
   secret_key_base: '1234567890'
 rabbitmq:
   consumer_pool: 10
+logger:
+  path: log/app.log
+  level: info
